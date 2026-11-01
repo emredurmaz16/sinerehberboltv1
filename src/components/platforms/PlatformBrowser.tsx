@@ -2,7 +2,7 @@ import { useState } from 'react';
 import MediaRow from '@/components/common/MediaRow';
 import { useAsync } from '@/hooks/useAsync';
 import { PLATFORMS, type StreamingPlatform } from '@/lib/platforms';
-import { discoverMedia } from '@/services/tmdb';
+import { discoverMedia, getPlatformLogos, tmdbImage } from '@/services/tmdb';
 import type { MediaItem, PagedResult } from '@/types/media';
 
 type Ordering = 'popular' | 'latest';
@@ -32,12 +32,18 @@ async function loadPlatformTitles(providerId: number, ordering: Ordering): Promi
 
 export default function PlatformBrowser() {
   const [platform, setPlatform] = useState<StreamingPlatform>(PLATFORMS[0]);
+  const logos = useAsync(getPlatformLogos, []);
+  const logoFor = (providerId: number) => {
+    const path = logos.data?.[providerId];
+    return path ? tmdbImage(path, 'w92') : null;
+  };
 
   return (
     <div className="space-y-12">
       <div role="tablist" aria-label="Platform seçimi" className="scrollbar-hide flex gap-6 overflow-x-auto border-b border-white/10">
         {PLATFORMS.map((option) => {
           const active = option.id === platform.id;
+          const logo = logoFor(option.id);
           return (
             <button
               key={option.id}
@@ -49,7 +55,11 @@ export default function PlatformBrowser() {
                 active ? 'text-amber-300' : 'text-neutral-400 hover:text-neutral-100'
               }`}
             >
-              <span className={`h-2.5 w-2.5 rounded-full bg-gradient-to-br ${option.gradient}`} />
+              {logo ? (
+                <img src={logo} alt="" className="h-5 w-5 rounded object-contain" />
+              ) : (
+                <span className={`h-2.5 w-2.5 rounded-full bg-gradient-to-br ${option.gradient}`} />
+              )}
               {option.name}
               {active && <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-amber-400" />}
             </button>
@@ -57,7 +67,7 @@ export default function PlatformBrowser() {
         })}
       </div>
 
-      <PlatformRows key={platform.id} platform={platform} />
+      <PlatformRows key={platform.id} platform={platform} platformLogo={logoFor(platform.id)} />
 
       <p className="text-xs text-neutral-500">
         Platform verileri TMDB aracılığıyla JustWatch üzerinden alınır. Uygunluk zamanla değişebilir.
@@ -66,7 +76,7 @@ export default function PlatformBrowser() {
   );
 }
 
-function PlatformRows({ platform }: { platform: StreamingPlatform }) {
+function PlatformRows({ platform, platformLogo }: { platform: StreamingPlatform; platformLogo: string | null }) {
   const popular = useAsync(() => loadPlatformTitles(platform.id, 'popular'), [platform.id]);
   const latest = useAsync(() => loadPlatformTitles(platform.id, 'latest'), [platform.id]);
   const viewAllTo = `/platform/${platform.slug}`;
@@ -79,6 +89,7 @@ function PlatformRows({ platform }: { platform: StreamingPlatform }) {
         isLoading={popular.loading}
         error={popular.error}
         viewAllTo={viewAllTo}
+        platformLogo={platformLogo}
       />
       <MediaRow
         title={`${platform.name}'daki Yeni Yapımlar`}
@@ -86,6 +97,7 @@ function PlatformRows({ platform }: { platform: StreamingPlatform }) {
         isLoading={latest.loading}
         error={latest.error}
         viewAllTo={viewAllTo}
+        platformLogo={platformLogo}
       />
     </div>
   );

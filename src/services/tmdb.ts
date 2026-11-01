@@ -13,7 +13,7 @@ const READ_TOKEN =
 const LANGUAGE = 'tr-TR';
 const REGION = 'TR';
 
-export type ImageSize = 'w185' | 'w342' | 'w500' | 'w780' | 'w1280' | 'original';
+export type ImageSize = 'w92' | 'w185' | 'w342' | 'w500' | 'w780' | 'w1280' | 'original';
 
 export function tmdbImage(path: string | null | undefined, size: ImageSize = 'w500'): string | null {
   return path ? `https://image.tmdb.org/t/p/${size}${path}` : null;
@@ -115,6 +115,16 @@ function toPaged(data: RawPage<RawMedia>, fallbackType?: MediaType): PagedResult
     return type ? [normalize(raw, type)] : [];
   });
   return { items, page: data.page, totalPages: data.total_pages };
+}
+
+export async function getPlatformLogos(): Promise<Record<number, string>> {
+  const data = await tmdbGet<{ results: { provider_id: number; logo_path: string | null }[] }>(
+    '/watch/providers/movie',
+    { watch_region: REGION },
+  );
+  return Object.fromEntries(
+    data.results.flatMap((provider) => (provider.logo_path ? [[provider.provider_id, provider.logo_path]] : [])),
+  );
 }
 
 export function getTrending(

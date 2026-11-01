@@ -6,9 +6,10 @@ import type { MediaItem } from '@/types/media';
 
 interface MediaCardProps {
   item: MediaItem;
+  platformLogo?: string | null;
 }
 
-export default function MediaCard({ item }: MediaCardProps) {
+export default function MediaCard({ item, platformLogo = null }: MediaCardProps) {
   const poster = tmdbImage(item.posterPath, 'w500');
   const title = item.title || 'İsimsiz';
   const hasRating = item.voteCount > 0;
@@ -27,6 +28,11 @@ export default function MediaCard({ item }: MediaCardProps) {
           <div className="flex h-full w-full items-center justify-center text-neutral-600">
             {item.mediaType === 'movie' ? <Film className="h-10 w-10" /> : <Tv className="h-10 w-10" />}
           </div>
+        )}
+        {platformLogo && (
+          <span className="absolute bottom-2 left-2 flex h-7 w-7 items-center justify-center overflow-hidden rounded-md bg-white p-1 shadow-md">
+            <img src={platformLogo} alt="" className="h-full w-full object-contain" />
+          </span>
         )}
         {hasRating && (
           <span className="absolute left-2 top-2 flex items-center gap-1 rounded-md bg-black/70 px-1.5 py-0.5 text-xs font-semibold text-amber-300 backdrop-blur-sm">

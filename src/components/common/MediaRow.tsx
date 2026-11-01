@@ -11,9 +11,10 @@ interface MediaRowProps {
   isLoading: boolean;
   error: string | null;
   viewAllTo?: string;
+  platformLogo?: string | null;
 }
 
-export default function MediaRow({ title, items, isLoading, error, viewAllTo }: MediaRowProps) {
+export default function MediaRow({ title, items, isLoading, error, viewAllTo, platformLogo }: MediaRowProps) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const scrollTrack = (direction: 1 | -1) => {
@@ -68,7 +69,7 @@ export default function MediaRow({ title, items, isLoading, error, viewAllTo }: 
             ))}
           {items.map((item) => (
             <div key={`${item.mediaType}-${item.id}`} className="w-36 shrink-0 snap-start sm:w-44">
-              <MediaCard item={item} />
+              <MediaCard item={item} platformLogo={platformLogo} />
             </div>
           ))}
         </div>
