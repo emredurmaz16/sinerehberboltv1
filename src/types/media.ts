@@ -47,3 +47,8 @@ export interface MediaDetail extends MediaItem {
   providers: Provider[];
   similar: MediaItem[];
 }
+
+export interface TrailerItem extends MediaItem {
+  trailerKey: string;
+  genreNames: string[];
+}

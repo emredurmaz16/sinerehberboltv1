@@ -5,6 +5,7 @@ import type {
   MediaItem,
   MediaType,
   PagedResult,
+  TrailerItem,
 } from '@/types/media';
 
 const API_BASE = 'https://api.themoviedb.org/3';
@@ -174,6 +175,41 @@ export function discoverMedia(mediaType: MediaType, options: DiscoverOptions = {
 export async function getGenres(mediaType: MediaType): Promise<Genre[]> {
   const data = await tmdbGet<{ genres: Genre[] }>(`/genre/${mediaType}/list`);
   return data.genres;
+}
+
+interface RawVideos {
+  results: { key: string; site: string; type: string; official: boolean }[];
+}
+
+async function getTrailerKey(mediaType: MediaType, id: number): Promise<string | null> {
+  const data = await tmdbGet<RawVideos>(`/${mediaType}/${id}/videos`, { language: 'en-US' });
+  const trailer =
+    data.results.find((v) => v.site === 'YouTube' && v.type === 'Trailer' && v.official) ??
+    data.results.find((v) => v.site === 'YouTube' && v.type === 'Trailer');
+  return trailer?.key ?? null;
+}
+
+export async function getLatestTrailers(): Promise<TrailerItem[]> {
+  const [movies, shows, movieGenres, tvGenres] = await Promise.all([
+    getCategory('/movie/now_playing', 'movie'),
+    getCategory('/tv/on_the_air', 'tv'),
+    getGenres('movie'),
+    getGenres('tv'),
+  ]);
+  const candidates = [...movies.items, ...shows.items];
+  const keys = await Promise.allSettled(candidates.map((item) => getTrailerKey(item.mediaType, item.id)));
+  const genreNames = new Map<number, string>([...movieGenres, ...tvGenres].map((genre) => [genre.id, genre.name]));
+
+  return candidates.flatMap((item, index) => {
+    const result = keys[index];
+    const trailerKey = result.status === 'fulfilled' ? result.value : null;
+    if (!trailerKey) return [];
+    const names = item.genreIds
+      .map((id) => genreNames.get(id))
+      .filter((name): name is string => Boolean(name))
+      .slice(0, 3);
+    return [{ ...item, trailerKey, genreNames: names }];
+  }).slice(0, 14);
 }
 
 export function searchMedia(query: string, page = 1): Promise<PagedResult> {

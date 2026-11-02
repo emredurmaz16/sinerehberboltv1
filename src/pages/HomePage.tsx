@@ -1,5 +1,6 @@
 import GenreTiles from '@/components/home/GenreTiles';
 import HeroBanner from '@/components/home/HeroBanner';
+import LatestTrailers from '@/components/home/LatestTrailers';
 import MediaRow from '@/components/common/MediaRow';
 import { ErrorState } from '@/components/common/StateMessage';
 import PlatformBrowser from '@/components/platforms/PlatformBrowser';
@@ -47,6 +48,7 @@ export default function HomePage() {
           error={newMovies.error}
           viewAllTo="/liste/filmler-vizyonda"
         />
+        <LatestTrailers />
 
         <section className="space-y-6">
           <div className="flex flex-col gap-2">
