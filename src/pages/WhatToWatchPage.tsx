@@ -118,7 +118,7 @@ export default function WhatToWatchPage() {
                   aria-pressed={mediaType === option.value}
                   className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
                     mediaType === option.value
-                      ? 'bg-amber-400 text-neutral-950'
+                      ? 'bg-amber-400 text-black'
                       : 'border border-white/10 bg-white/5 text-neutral-200 hover:border-amber-400/50'
                   }`}
                 >
@@ -141,7 +141,7 @@ export default function WhatToWatchPage() {
                       aria-pressed={genreId === genre.id}
                       className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
                         genreId === genre.id
-                          ? 'bg-amber-400 text-neutral-950'
+                          ? 'bg-amber-400 text-black'
                           : 'border border-white/10 bg-white/5 text-neutral-200 hover:border-amber-400/50'
                       }`}
                     >
@@ -156,7 +156,7 @@ export default function WhatToWatchPage() {
               type="button"
               onClick={recommend}
               disabled={busy || genres.loading}
-              className="flex items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-amber-300 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-black transition hover:bg-amber-300 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <Shuffle className="h-4 w-4" />
               {busy ? 'Öneri hazırlanıyor...' : 'Bana Bir Öneri Getir'}
@@ -191,7 +191,7 @@ export default function WhatToWatchPage() {
                   </div>
                   <div className="min-w-0 flex-1 space-y-3">
                     <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-300">
-                      <span className="rounded-md bg-amber-400 px-2 py-0.5 font-bold uppercase text-neutral-950">
+                      <span className="rounded-md bg-amber-400 px-2 py-0.5 font-bold uppercase text-black">
                         {mediaTypeLabel(pick.mediaType)}
                       </span>
                       {pick.year && <span>{pick.year}</span>}
@@ -202,14 +202,14 @@ export default function WhatToWatchPage() {
                         </span>
                       )}
                     </div>
-                    <h2 className="text-2xl font-bold text-white sm:text-3xl">{pick.title}</h2>
+                    <h2 className="text-2xl font-bold text-neutral-50 sm:text-3xl">{pick.title}</h2>
                     <p className="line-clamp-3 text-sm leading-relaxed text-neutral-300">
                       {pick.overview || 'Bu içerik için özet bulunmuyor.'}
                     </p>
                     <div className="flex flex-wrap gap-3 pt-2">
                       <Link
                         to={mediaPath(pick)}
-                        className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-neutral-950 transition hover:bg-amber-300"
+                        className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-amber-300"
                       >
                         Detayları Gör
                         <ArrowRight className="h-4 w-4" />

@@ -48,7 +48,7 @@ function PlatformContent({ platform }: PlatformContentProps) {
             onClick={() => setMediaType(tab.value)}
             className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
               mediaType === tab.value
-                ? 'bg-amber-400 text-neutral-950'
+                ? 'bg-amber-400 text-black'
                 : 'border border-white/10 bg-white/5 text-neutral-200 hover:border-amber-400/50 hover:text-amber-300'
             }`}
           >

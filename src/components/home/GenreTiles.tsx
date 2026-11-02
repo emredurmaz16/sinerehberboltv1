@@ -25,7 +25,7 @@ export default function GenreTiles({ genres, mediaType }: GenreTilesProps) {
         <Link
           key={genre.id}
           to={`/tur/${mediaType}/${genre.id}`}
-          className={`group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br ${TILE_TINTS[index % TILE_TINTS.length]} to-neutral-900 p-5 transition duration-300 hover:-translate-y-0.5 hover:border-amber-400/50`}
+          className={`group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br ${TILE_TINTS[index % TILE_TINTS.length]} to-[#171717] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-amber-400/50`}
         >
           <span className="text-base font-semibold text-white">{genre.name}</span>
           <ArrowUpRight className="absolute right-4 top-4 h-4 w-4 text-neutral-200 opacity-0 transition group-hover:opacity-100" />

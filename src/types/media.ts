@@ -52,3 +52,35 @@ export interface TrailerItem extends MediaItem {
   trailerKey: string;
   genreNames: string[];
 }
+
+export interface PersonCredit extends MediaItem {
+  character: string;
+}
+
+export interface CoStar {
+  id: number;
+  name: string;
+  profilePath: string | null;
+  sharedTitle: string;
+}
+
+export interface PersonDetail {
+  id: number;
+  name: string;
+  department: string | null;
+  profilePath: string | null;
+  birthday: string | null;
+  deathday: string | null;
+  placeOfBirth: string | null;
+  biography: string;
+  filmography: PersonCredit[];
+  photos: string[];
+  coStars: CoStar[];
+}
+
+export interface PopularPerson {
+  id: number;
+  name: string;
+  profilePath: string | null;
+  department: string | null;
+}

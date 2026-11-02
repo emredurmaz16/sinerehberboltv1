@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import MobileMenu from '@/components/layout/MobileMenu';
 import { NavEntryItem } from '@/components/layout/NavEntryItem';
 import SearchBox from '@/components/layout/SearchBox';
+import ThemeToggle from '@/components/layout/ThemeToggle';
 import { NAV_ENTRIES } from '@/lib/navigation';
 
 export default function Navbar() {
@@ -31,15 +32,15 @@ export default function Navbar() {
       className={`sticky top-0 z-50 transition-colors duration-300 ${
         scrolled || mobileOpen
           ? 'border-b border-white/5 bg-neutral-950/95 shadow-lg shadow-black/30 backdrop-blur-md'
-          : 'bg-gradient-to-b from-neutral-950/90 to-transparent'
+          : 'theme-dark bg-gradient-to-b from-neutral-950/90 to-transparent'
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:gap-6 lg:px-8">
         <Link to="/" className="group flex shrink-0 items-center gap-2" aria-label="SineRehber ana sayfa">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-400 text-neutral-950 transition group-hover:scale-105">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-400 text-black transition group-hover:scale-105">
             <Clapperboard className="h-5 w-5" />
           </span>
-          <span className="text-lg font-bold tracking-tight text-white">
+          <span className="text-lg font-bold tracking-tight text-neutral-50">
             Sine<span className="text-amber-400">Rehber</span>
           </span>
         </Link>
@@ -59,6 +60,7 @@ export default function Navbar() {
 
         <div className="ml-auto flex items-center gap-3">
           <SearchBox className="hidden w-56 md:block xl:w-72" />
+          <ThemeToggle />
           <button
             type="button"
             onClick={() => setMobileOpen((open) => !open)}

@@ -23,12 +23,12 @@ export default function DetailHero({ detail }: DetailHeroProps) {
   );
 
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="theme-dark relative isolate overflow-hidden">
       {backdrop && (
         <img src={backdrop} alt="" aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full object-cover" />
       )}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-neutral-950 via-neutral-950/85 to-neutral-950/50" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-neutral-950 via-neutral-950/30 to-transparent" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black via-black/85 to-black/50" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 pb-14 pt-28 sm:px-6 md:flex-row md:items-end lg:gap-14 lg:px-8 lg:pt-36">
         <div className="w-56 shrink-0 animate-fade-up sm:w-64">
@@ -87,7 +87,7 @@ export default function DetailHero({ detail }: DetailHeroProps) {
               <button
                 type="button"
                 onClick={() => setTrailerOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-amber-300"
+                className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-black transition hover:bg-amber-300"
               >
                 <Play className="h-4 w-4 fill-current" />
                 Fragmanı İzle

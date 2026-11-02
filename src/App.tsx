@@ -6,6 +6,7 @@ import DetailPage from '@/pages/DetailPage';
 import GenrePage from '@/pages/GenrePage';
 import HomePage from '@/pages/HomePage';
 import NotFoundPage from '@/pages/NotFoundPage';
+import PersonDetailPage from '@/pages/PersonDetailPage';
 import PlatformDetailPage from '@/pages/PlatformDetailPage';
 import PlatformsPage from '@/pages/PlatformsPage';
 import PresetListPage from '@/pages/PresetListPage';
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="ara" element={<SearchPage />} />
         <Route path="film/:id" element={<DetailPage mediaType="movie" />} />
         <Route path="dizi/:id" element={<DetailPage mediaType="tv" />} />
+        <Route path="sanatcilar/:id" element={<PersonDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

@@ -29,7 +29,7 @@ export function getErrorMessage(error: unknown): string {
 
 type Params = Record<string, string | number | undefined>;
 
-interface RawMedia {
+export interface RawMedia {
   id: number;
   media_type?: string;
   title?: string;
@@ -69,7 +69,7 @@ interface RawDetail extends RawMedia {
   similar?: RawPage<RawMedia>;
 }
 
-async function tmdbGet<T>(path: string, params: Params = {}): Promise<T> {
+export async function tmdbGet<T>(path: string, params: Params = {}): Promise<T> {
   const url = new URL(`${API_BASE}${path}`);
   url.searchParams.set('language', LANGUAGE);
   Object.entries(params).forEach(([key, value]) => {
@@ -88,12 +88,12 @@ async function tmdbGet<T>(path: string, params: Params = {}): Promise<T> {
   return (await response.json()) as T;
 }
 
-function resolveType(raw: RawMedia, fallback?: MediaType): MediaType | null {
+export function resolveType(raw: RawMedia, fallback?: MediaType): MediaType | null {
   if (fallback) return fallback;
   return raw.media_type === 'movie' || raw.media_type === 'tv' ? raw.media_type : null;
 }
 
-function normalize(raw: RawMedia, mediaType: MediaType): MediaItem {
+export function normalize(raw: RawMedia, mediaType: MediaType): MediaItem {
   const isMovie = mediaType === 'movie';
   const date = (isMovie ? raw.release_date : raw.first_air_date) ?? '';
   return {

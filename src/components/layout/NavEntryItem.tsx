@@ -31,7 +31,7 @@ export function NavEntryItem({ entry, isOpen, onOpen, onClose, onToggle }: NavDr
         to={entry.to}
         end={entry.to === '/'}
         className={({ isActive }) =>
-          `${linkBase} ${isActive ? 'text-amber-400 after:absolute after:inset-x-3 after:-bottom-[18px] after:h-0.5 after:rounded-full after:bg-amber-400' : 'text-neutral-200 hover:text-white'}`
+          `${linkBase} ${isActive ? 'text-amber-400 after:absolute after:inset-x-3 after:-bottom-[18px] after:h-0.5 after:rounded-full after:bg-amber-400' : 'text-neutral-200 hover:text-neutral-50'}`
         }
       >
         {entry.label}
@@ -45,7 +45,7 @@ export function NavEntryItem({ entry, isOpen, onOpen, onClose, onToggle }: NavDr
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className={`${linkBase} ${isOpen ? 'text-amber-400' : 'text-neutral-200 hover:text-white'}`}
+        className={`${linkBase} ${isOpen ? 'text-amber-400' : 'text-neutral-200 hover:text-neutral-50'}`}
       >
         {entry.label}
         <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />

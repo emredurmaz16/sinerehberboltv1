@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="border-t border-white/5 bg-neutral-950">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
         <div className="space-y-2">
-          <Link to="/" className="flex items-center gap-2 text-base font-bold text-white">
+          <Link to="/" className="flex items-center gap-2 text-base font-bold text-neutral-50">
             <Clapperboard className="h-5 w-5 text-amber-400" />
             Sine<span className="text-amber-400">Rehber</span>
           </Link>

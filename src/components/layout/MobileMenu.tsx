@@ -44,7 +44,7 @@ export default function MobileMenu({ onNavigate }: MobileMenuProps) {
                     key={child.to}
                     to={child.to}
                     onClick={onNavigate}
-                    className="rounded-lg px-2 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white"
+                    className="rounded-lg px-2 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-neutral-50"
                   >
                     {child.label}
                   </NavLink>

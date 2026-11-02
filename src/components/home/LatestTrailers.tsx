@@ -90,7 +90,7 @@ function TrailerCard({ item, onPlay }: TrailerCardProps) {
           />
         )}
         <div className="absolute inset-0 flex items-center justify-center bg-black/25 transition duration-300 group-hover:bg-black/45">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/70 bg-black/40 text-white backdrop-blur-sm transition duration-300 group-hover:scale-110 group-hover:border-amber-400 group-hover:bg-amber-400 group-hover:text-neutral-950">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/70 bg-black/40 text-white backdrop-blur-sm transition duration-300 group-hover:scale-110 group-hover:border-amber-400 group-hover:bg-amber-400 group-hover:text-black">
             <Play className="h-5 w-5 fill-current" />
           </span>
         </div>

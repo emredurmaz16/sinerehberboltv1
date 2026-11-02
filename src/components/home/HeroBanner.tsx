@@ -30,9 +30,9 @@ export default function HeroBanner({ items }: HeroBannerProps) {
 
   return (
     <section
-      onMouseEnter={() => setPaused(true)}
+       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      className="group relative h-[80vh] min-h-[560px] max-h-[820px] w-full overflow-hidden bg-neutral-950"
+      className="theme-dark group relative h-[80vh] min-h-[560px] max-h-[820px] w-full overflow-hidden bg-neutral-950"
     >
       {items.map((item, itemIndex) => (
         <img
@@ -45,8 +45,8 @@ export default function HeroBanner({ items }: HeroBannerProps) {
           }`}
         />
       ))}
-      <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/75 to-neutral-950/10" />
-      <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/75 to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
 
       <div className="absolute inset-0 flex items-end md:items-center">
         <div className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6 md:pb-0 lg:px-8">
@@ -74,7 +74,7 @@ export default function HeroBanner({ items }: HeroBannerProps) {
             <div className="pt-2">
               <Link
                 to={mediaPath(active)}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-neutral-950 transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-200"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-200"
               >
                 <Info className="h-4 w-4" />
                 Detayları Gör
