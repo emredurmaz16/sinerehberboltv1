@@ -3,6 +3,7 @@ import HeroBanner from '@/components/home/HeroBanner';
 import LatestTrailers from '@/components/home/LatestTrailers';
 import MediaRow from '@/components/common/MediaRow';
 import { ErrorState } from '@/components/common/StateMessage';
+import TvShowsByChannel from '@/components/home/TvShowsByChannel';
 import PlatformBrowser from '@/components/platforms/PlatformBrowser';
 import { useAsync } from '@/hooks/useAsync';
 import { getCategory, getGenres, getTrending } from '@/services/tmdb';
@@ -41,6 +42,7 @@ export default function HomePage() {
           error={trendingTv.error}
           viewAllTo="/liste/diziler-populer"
         />
+        <TvShowsByChannel />
         <MediaRow
           title="Yeni Çıkanlar"
           items={newMovies.data?.items ?? []}

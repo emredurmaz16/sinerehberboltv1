@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import LogoTabs from '@/components/common/LogoTabs';
 import MediaRow from '@/components/common/MediaRow';
 import { useAsync } from '@/hooks/useAsync';
 import { PLATFORMS, type StreamingPlatform } from '@/lib/platforms';
@@ -40,32 +41,17 @@ export default function PlatformBrowser() {
 
   return (
     <div className="space-y-12">
-      <div role="tablist" aria-label="Platform seçimi" className="scrollbar-hide flex gap-6 overflow-x-auto border-b border-white/10">
-        {PLATFORMS.map((option) => {
-          const active = option.id === platform.id;
-          const logo = logoFor(option.id);
-          return (
-            <button
-              key={option.id}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              onClick={() => setPlatform(option)}
-              className={`relative flex shrink-0 items-center gap-2.5 pb-3 text-sm font-semibold transition ${
-                active ? 'text-amber-300' : 'text-neutral-400 hover:text-neutral-100'
-              }`}
-            >
-              {logo ? (
-                <img src={logo} alt="" className="h-5 w-5 rounded object-contain" />
-              ) : (
-                <span className={`h-2.5 w-2.5 rounded-full bg-gradient-to-br ${option.gradient}`} />
-              )}
-              {option.name}
-              {active && <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-amber-400" />}
-            </button>
-          );
-        })}
-      </div>
+      <LogoTabs
+        label="Platform seçimi"
+        value={platform.id}
+        onChange={(id) => setPlatform(PLATFORMS.find((option) => option.id === id) ?? PLATFORMS[0])}
+        options={PLATFORMS.map((option) => ({
+          value: option.id,
+          label: option.name,
+          logo: logoFor(option.id),
+          fallbackDotClassName: `bg-gradient-to-br ${option.gradient}`,
+        }))}
+      />
 
       <PlatformRows key={platform.id} platform={platform} platformLogo={logoFor(platform.id)} />
 

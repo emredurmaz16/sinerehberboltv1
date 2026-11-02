@@ -128,6 +128,13 @@ export async function getPlatformLogos(): Promise<Record<number, string>> {
   );
 }
 
+export async function getNetworkLogos(networkIds: number[]): Promise<Record<number, string>> {
+  const networks = await Promise.all(
+    networkIds.map((id) => tmdbGet<{ logo_path: string | null }>(`/network/${id}`).then((data) => [id, data.logo_path] as const)),
+  );
+  return Object.fromEntries(networks.flatMap(([id, logoPath]) => (logoPath ? [[id, logoPath]] : [])));
+}
+
 export function getTrending(
   window: 'day' | 'week',
   type: MediaType | 'all',
@@ -146,6 +153,7 @@ interface DiscoverOptions {
   page?: number;
   genreId?: number;
   providerId?: number;
+  networkIds?: number[];
   originalLanguage?: string;
   sortBy?: string;
   minVotes?: number;
@@ -156,6 +164,7 @@ export function discoverMedia(mediaType: MediaType, options: DiscoverOptions = {
     page = 1,
     genreId,
     providerId,
+    networkIds,
     originalLanguage,
     sortBy = 'popularity.desc',
     minVotes,
@@ -166,6 +175,7 @@ export function discoverMedia(mediaType: MediaType, options: DiscoverOptions = {
     sort_by: sortBy,
     with_genres: genreId,
     with_watch_providers: providerId,
+    with_networks: networkIds?.join('|'),
     watch_region: providerId ? REGION : undefined,
     with_original_language: originalLanguage,
     'vote_count.gte': minVotes,

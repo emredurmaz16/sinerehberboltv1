@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useRef } from 'react';
+import { type ReactNode, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import MediaCard from '@/components/common/MediaCard';
 import { ErrorState, PosterSkeleton } from '@/components/common/StateMessage';
@@ -12,9 +12,10 @@ interface MediaRowProps {
   error: string | null;
   viewAllTo?: string;
   platformLogo?: string | null;
+  toolbar?: ReactNode;
 }
 
-export default function MediaRow({ title, items, isLoading, error, viewAllTo, platformLogo }: MediaRowProps) {
+export default function MediaRow({ title, items, isLoading, error, viewAllTo, platformLogo, toolbar }: MediaRowProps) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const scrollTrack = (direction: 1 | -1) => {
@@ -53,6 +54,8 @@ export default function MediaRow({ title, items, isLoading, error, viewAllTo, pl
           </div>
         </div>
       </div>
+
+      {toolbar}
 
       {error && <ErrorState message={error} />}
 

@@ -10,6 +10,7 @@ import PlatformDetailPage from '@/pages/PlatformDetailPage';
 import PlatformsPage from '@/pages/PlatformsPage';
 import PresetListPage from '@/pages/PresetListPage';
 import SearchPage from '@/pages/SearchPage';
+import TvShowsPage from '@/pages/TvShowsPage';
 import WhatToWatchPage from '@/pages/WhatToWatchPage';
 
 function AppLayout() {
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="liste/:presetId" element={<PresetListPage />} />
         <Route path="tur/:mediaType/:genreId" element={<GenrePage />} />
         <Route path="platformlar" element={<PlatformsPage />} />
+        <Route path="tv-dizileri" element={<TvShowsPage />} />
         <Route path="platform/:slug" element={<PlatformDetailPage />} />
         <Route path="ne-izlesem" element={<WhatToWatchPage />} />
         <Route path="ara" element={<SearchPage />} />
