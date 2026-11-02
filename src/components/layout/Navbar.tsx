@@ -59,7 +59,7 @@ export default function Navbar() {
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
-          <SearchBox className="hidden w-56 md:block xl:w-72" />
+          <SearchBox className="hidden w-48 md:block xl:w-64" />
           <ThemeToggle />
           <button
             type="button"
